@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Authors | Rohan Juneja</title>
+    <link>/authors/</link>
+      <atom:link href="/authors/index.xml" rel="self" type="application/rss+xml" />
+    <description>Authors</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Tue, 02 Jul 2019 22:36:56 +0530</lastBuildDate>
+    <image>
+      <url>/img/mine</url>
+      <title>Authors</title>
+      <link>/authors/</link>
+    </image>
+    
+    <item>
+      <title>and Changhai Ou</title>
+      <link>/authors/and-changhai-ou/</link>
+      <pubDate>Tue, 02 Jul 2019 22:36:56 +0530</pubDate>
+      <guid>/authors/and-changhai-ou/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Guiyuan Jiang</title>
+      <link>/authors/guiyuan-jiang/</link>
+      <pubDate>Tue, 02 Jul 2019 22:36:56 +0530</pubDate>
+      <guid>/authors/guiyuan-jiang/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Rohan Juneja</title>
+      <link>/authors/rohan-juneja/</link>
+      <pubDate>Tue, 02 Jul 2019 22:36:56 +0530</pubDate>
+      <guid>/authors/rohan-juneja/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Saru Vig</title>
+      <link>/authors/saru-vig/</link>
+      <pubDate>Tue, 02 Jul 2019 22:36:56 +0530</pubDate>
+      <guid>/authors/saru-vig/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Siew-Kei Lam</title>
+      <link>/authors/siew-kei-lam/</link>
+      <pubDate>Tue, 02 Jul 2019 22:36:56 +0530</pubDate>
+      <guid>/authors/siew-kei-lam/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Hemanta Kumar Mondal</title>
+      <link>/authors/hemanta-kumar-mondal/</link>
+      <pubDate>Thu, 10 May 2018 22:27:19 +0530</pubDate>
+      <guid>/authors/hemanta-kumar-mondal/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Sidhartha Sankar Rout</title>
+      <link>/authors/sidhartha-sankar-rout/</link>
+      <pubDate>Thu, 10 May 2018 22:27:19 +0530</pubDate>
+      <guid>/authors/sidhartha-sankar-rout/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Sri Harsha Gade</title>
+      <link>/authors/sri-harsha-gade/</link>
+      <pubDate>Thu, 10 May 2018 22:27:19 +0530</pubDate>
+      <guid>/authors/sri-harsha-gade/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Sujay Deb</title>
+      <link>/authors/sujay-deb/</link>
+      <pubDate>Thu, 10 May 2018 22:27:19 +0530</pubDate>
+      <guid>/authors/sujay-deb/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>/authors/admin/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/authors/admin/</guid>
+      <description>&lt;p&gt;Hey there! I am a CPU Design Engineer at Qualcomm, India. Prior to this, I completed my undergraduate degree in Electronics and Communication Engineering from IIIT Delhi, where I spent an amazing time at AMS Lab, headed by Prof. Sujay Deb. My undergraduate research was also supervised by Prof. Lam Siew Kei during my amazing time at Nanyang Technological University, Singapore, working on hardware security algorithms for off-chip memories.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
