@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Siew-Kei Lam | Rohan Juneja</title>
+    <link>/authors/siew-kei-lam/</link>
+      <atom:link href="/authors/siew-kei-lam/index.xml" rel="self" type="application/rss+xml" />
+    <description>Siew-Kei Lam</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Tue, 02 Jul 2019 22:36:56 +0530</lastBuildDate>
+    <image>
+      <url>/img/mine</url>
+      <title>Siew-Kei Lam</title>
+      <link>/authors/siew-kei-lam/</link>
+    </image>
+    
+    <item>
+      <title>Framework for Fast Memory Authentication Using Dynamically Skewed Integrity Tree</title>
+      <link>/publication/dynamic_skewed_tree/</link>
+      <pubDate>Tue, 02 Jul 2019 22:36:56 +0530</pubDate>
+      <guid>/publication/dynamic_skewed_tree/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

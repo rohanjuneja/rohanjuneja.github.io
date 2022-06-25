@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Rohan Juneja</title>
+    <link>/</link>
+      <atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <description>Rohan Juneja</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Tue, 02 Jul 2019 22:36:56 +0530</lastBuildDate>
+    <image>
+      <url>/img/mine</url>
+      <title>Rohan Juneja</title>
+      <link>/</link>
+    </image>
+    
+    <item>
+      <title>Framework for Fast Memory Authentication Using Dynamically Skewed Integrity Tree</title>
+      <link>/publication/dynamic_skewed_tree/</link>
+      <pubDate>Tue, 02 Jul 2019 22:36:56 +0530</pubDate>
+      <guid>/publication/dynamic_skewed_tree/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Dynamic NoC Platform for Varied Application Needs</title>
+      <link>/publication/dynamic_noc_platform/</link>
+      <pubDate>Thu, 10 May 2018 22:27:19 +0530</pubDate>
+      <guid>/publication/dynamic_noc_platform/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
