@@ -1,0 +1,33 @@
+document.addEventListener("DOMContentLoaded", () => {
+    // Fetch the publications JSON file
+    fetch("publications.json")
+        .then(response => response.json())
+        .then(data => {
+            const container = document.getElementById("publication-list");
+
+            // Iterate through each publication and build HTML
+            data.forEach(pub => {
+                const publicationHTML = `
+                    <div class="row mb-4">
+                        <!-- Left Section: Conference Name -->
+                        <div class="col-md-4 text-center">
+                            <span class="badge badge-danger badge-custom">${pub.conference}</span>
+                        </div>
+
+                        <!-- Right Section: Title, Authors, Conference -->
+                        <div class="col-md-8">
+                            <h3 class="article-title">${pub.title}</h3>
+                            <p class="article-style">${pub.authors}</p>
+                            <p class="font-italic">${pub.details}</p>
+                        </div>
+                    </div>
+                `;
+                // Append the generated HTML to the container
+                container.insertAdjacentHTML("beforeend", publicationHTML);
+            });
+        })
+        .catch(error => {
+            console.error("Error loading publications:", error);
+        });
+});
+

@@ -1,0 +1,15 @@
+[
+  {
+    "conference": "HPCA",
+    "title": "CAMEL: Co-Designing AI Models and Embedded DRAMs for Efficient On-Device Learning",
+    "authors": "Sai Qian Zhang*, Thierry Tambe*, Nestor Cuevas, Gu-Yeon Wei, and David Brooks",
+    "details": "In International Symposium on High-Performance Computer Architecture (HPCA), 2024"
+  },
+  {
+    "conference": "DAC",
+    "title": "NOVA: NoC-based Vector Unit for Mapping Attention Layers on a CNN Accelerator",
+    "authors": "Mohit Upadhyay, Rohan Juneja, Weng-Fai Wong, Li-Shiuan Peh",
+    "details": "In Design Automation Conference (DAC), 2024"
+  }
+]
+
