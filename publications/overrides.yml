@@ -1,0 +1,15 @@
+# Manual corrections for the auto-generated publications, keyed by slug.
+# You normally don't need this — it's an escape hatch for when the resume
+# parser gets something wrong, or you want to hide an entry.
+#
+# Find a paper's slug in the build manifest (or it's the folder name under
+# publications/). Then override any field. Examples:
+#
+# nexus-machine:
+#   venue: MICRO            # fix a misparsed venue acronym
+#   year: 2025              # fix a misparsed year
+#   title: 'Corrected title here'
+#   tags: [Best Paper]      # override status tags
+#   exclude: true           # hide this paper from the website entirely
+#
+# (Leave this file empty — just comments — when no overrides are needed.)

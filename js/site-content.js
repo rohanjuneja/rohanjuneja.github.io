@@ -179,6 +179,17 @@
               ? '<p class="font-italic" style="margin-bottom: ' + (hasLinks ? "10px" : "0") + ';"><em>' + pub.venue_html + "</em></p>"
               : "";
 
+            // Status badges (e.g. Under Review, SRC Winner, Best Paper).
+            var tags = (pub.tags || [])
+              .map(function (t) {
+                return '<span class="badge badge-warning" style="margin-left: 8px; font-size: 0.7rem; vertical-align: middle; text-transform: uppercase;">' + t + "</span>";
+              })
+              .join("");
+
+            var eqNote = pub.equal_contribution
+              ? '<p class="text-muted" style="margin: 0 0 6px; font-size: 0.8rem;"><em>* Equal contribution</em></p>'
+              : "";
+
             var buttons = hasLinks
               ? '<div class="d-flex flex-wrap gap-2">' +
                 pub.links
@@ -197,9 +208,10 @@
               '<span class="badge badge-danger" style="font-size: 1rem; padding: 5px 10px;">' + (pub.badge || "") + "</span>" +
               "</div>" +
               '<div class="col-md-10" style="padding-left: 5px;">' +
-              '<h3 class="article-title" style="margin-bottom: 5px; font-size: 1.2rem;">' + pub.title + "</h3>" +
+              '<h3 class="article-title" style="margin-bottom: 5px; font-size: 1.2rem;">' + pub.title + tags + "</h3>" +
               '<p class="article-style" style="margin-bottom: 3px;">' + pub.authors_html + "</p>" +
               venue +
+              eqNote +
               buttons +
               "</div></div>"
             );

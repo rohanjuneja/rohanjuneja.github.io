@@ -76,6 +76,8 @@ jobs:
                           for key in ("title", "authors_html"):
                               if key not in entry:
                                   errors.append(f"publications.yml: '{s['heading']}' entry #{j+1} missing '{key}'")
+                          if "tags" in entry and not isinstance(entry["tags"], list):
+                              errors.append(f"publications.yml: '{s['heading']}' entry #{j+1} 'tags' must be a list")
                           for k, link in enumerate(entry.get("links") or []):
                               if "label" not in link or "url" not in link:
                                   errors.append(f"publications.yml: '{s['heading']}' entry #{j+1} link #{k+1} needs 'label' and 'url'")

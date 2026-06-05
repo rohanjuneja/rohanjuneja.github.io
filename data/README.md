@@ -1,6 +1,6 @@
 # How to update the website
 
-All the content on **https://rohanjuneja.github.io** comes from the three files
+Most content on **https://rohanjuneja.github.io** comes from the files
 in this folder. Edit a file, commit, and push — the site updates automatically
 in 1–2 minutes. You never need to touch `index.html`.
 
@@ -9,7 +9,11 @@ in 1–2 minutes. You never need to touch `index.html`.
 | `profile.yml` | Photo, name, title, affiliation, red banner, biography, interests, education, social/contact icons |
 | `news.yml` | The "News" section — short dated updates, newest first |
 | `experience.yml` | Work / research timeline cards |
-| `publications.yml` | Papers, grouped into Conferences / Journals / Chip Tapeouts |
+| `publications.yml` | **Auto-generated — do not edit.** See "Publications" below. |
+
+> **Publications are different:** `publications.yml` is generated automatically
+> from your **résumé** (`files/resume.pdf`) by a GitHub Action. You don't edit it.
+> See the [Publications](#publications-automatic) section.
 
 ## Quick start
 
@@ -26,25 +30,38 @@ git push
 ```
 Then hard-refresh the site (Ctrl/Cmd + Shift + R).
 
-## Common edits
+## Publications (automatic)
 
-### Add a publication
-Paste a block under the right `entries:` list in `publications.yml`:
-```yaml
-      - badge: ISCA
-        title: Your Paper Title Here
-        authors_html: '<u><strong>Rohan Juneja</strong></u>, Co Author, Tulika Mitra'
-        venue_html: 'In International Symposium on Computer Architecture (<strong>ISCA</strong>) 2026'
-        links:
-          - {label: ABS, url: https://arxiv.org/abs/xxxx}
-          - {label: PDF, url: /publication/yourpaper.pdf}
-```
-- Wrap your own name as `<u><strong>Rohan Juneja</strong></u>`.
-- `venue_html` and `links` are optional — delete those lines if you don't need them.
-- `url: '#'` makes a greyed-out placeholder button.
-- For a PDF: drop the file in the `publication/` folder and link `/publication/yourpaper.pdf`.
-- `badge: ''` (empty) shows no venue tag on the left.
-- Add `divider_before: true` to draw a horizontal line above an entry.
+The Publications section is **built from your résumé** — you do not edit
+`data/publications.yml` by hand. On every push, a GitHub Action
+(`build-publications.yml`) runs `scripts/build_publications.py`, which:
+
+1. reads the "Publication Record" from `files/resume.pdf`,
+2. auto-fetches each published paper's **DOI** (IEEE/ACM link) from Crossref,
+3. picks up any slides/PDFs you uploaded (see below),
+4. regenerates `data/publications.yml` and commits it.
+
+### To add or change a paper
+**Edit `files/resume.pdf`** (i.e. update your résumé) and push. The new paper
+appears automatically — title, authors, venue, year, and status tags like
+`[Under Review]` / `[Best Paper]` are all read from the résumé. Your name is
+bolded automatically; `∗` equal-contribution markers become a footnote.
+
+### To add slides, a local PDF, or extra links
+Each paper has a folder `publications/<slug>/` (the `<slug>` is shown in the
+build log and is the folder name). Drop files in and push:
+
+- **`slides.pdf`** → a **SLIDES** button (viewable in-browser). Export `.pptx`
+  to PDF so it can be viewed inline.
+- **`paper.pdf`** → a **PDF** button.
+- **`links.yml`** in that folder holds `doi`, `arxiv`, `code`, `video`. The `doi`
+  is auto-filled; set/correct any field to pin it. Set `doi: ''` to force "no DOI".
+
+### If the résumé parser gets something wrong
+Edit `publications/overrides.yml` (keyed by slug) to fix a field or hide a paper.
+This is rarely needed.
+
+## Common edits
 
 ### Add a news update
 Paste a block at the **top** of `news.yml` (newest first):
