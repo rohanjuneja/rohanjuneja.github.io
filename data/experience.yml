@@ -1,0 +1,69 @@
+# =============================================================================
+# EXPERIENCE SECTION
+# Each "- " block is one experience entry, shown top-to-bottom as a timeline.
+# Add a new job by copying a block and editing the fields.
+#
+# Fields:
+#   title     : your role
+#   company   : organization name
+#   url       : link for the organization (opens in a new tab)
+#   date      : free text, e.g. "Oct 2025 – Present"
+#   location  : city / country (optional)
+#   current   : true for your current/ongoing role (fills the timeline dot)
+#   body_html : optional details. Use a "<ul><li>...</li></ul>" list (HTML allowed).
+# After editing, just commit & push — the website updates automatically.
+# =============================================================================
+
+- title: Research Scientist Intern
+  company: International Business Machines (IBM)
+  url: https://www.ibm.com/watson
+  date: Oct 2025 – Present
+  location: Yorktown Heights, New York
+  current: true
+
+- title: PhD Research Intern
+  company: Advanced Micro Devices (AMD)
+  url: https://www.amd.com/en
+  date: May 2022 – July 2022
+  location: Singapore
+  body_html: >-
+    <ul>
+    <li>Research Intern at AMD Xilinx Labs Asia Pacific CTO group.</li>
+    <li>Working on hardware-software accelerator for emerging blockchains.</li>
+    </ul>
+
+- title: PhD Research Intern
+  company: Renesas
+  url: https://www.renesas.com/
+  date: Jan 2022 – April 2022
+  location: Singapore
+  body_html: >-
+    <ul>
+    <li>Worked on DRP-AI accelerator.</li>
+    </ul>
+
+- title: CPU Design Engineer
+  company: Qualcomm
+  url: https://www.qualcomm.com/
+  date: Jul 2018 – Jan 2021
+  location: Bengaluru, India
+  body_html: >-
+    Responsibilities include:
+    <ul>
+    <li>Delivering multi-clock domain and Low Power(UPF) RTL delivery of ARM Kryo cores for Snapdragon chipsets</li>
+    <li>Exposure to Power ManagerIP, DCVS and Low Power Modes using ARM&rsquo;s P-channel, and boot RTL in Snapdragon CPU&rsquo;s</li>
+    <li>Experienced in writing SystemVerilog assertions, code coverage and functional coverage closure</li>
+    <li>Experienced in Synthesis flows, reviewing Design Constraints, timing arcs, and optimised registers</li>
+    </ul>
+
+- title: Research Internship
+  company: Nanyang Technological University
+  url: https://www.ntu.edu.sg/Pages/home.aspx
+  date: Aug 2017 – Dec 2017
+  location: Singapore
+  body_html: >-
+    <ul>
+    <li>Designed a dynamic memory authentication scheme for cyberphysical systems and improved upon it using cache-oblivious algorithms.</li>
+    <li>The design was initially studied on FPGA's and further integrated in Multi2sim system simulator to study the performance impact with various SPEC and PARSEC benchmarks.</li>
+    <li>Resulted in an average reduction of performance overhead by 20-30%.</li>
+    </ul>
