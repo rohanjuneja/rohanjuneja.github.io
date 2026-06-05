@@ -1,0 +1,91 @@
+name: Validate site data
+
+# Catches YAML typos in the data/ files before they break the live site.
+on:
+  push:
+    paths:
+      - "data/**.yml"
+      - ".github/workflows/validate-data.yml"
+  pull_request:
+    paths:
+      - "data/**.yml"
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Install PyYAML
+        run: pip install pyyaml
+
+      - name: Validate data/*.yml
+        run: |
+          python - <<'PY'
+          import sys, yaml
+
+          errors = []
+
+          def load(path):
+              with open(path) as f:
+                  return yaml.safe_load(f)
+
+          # profile.yml
+          try:
+              p = load("data/profile.yml")
+              for key in ("name", "avatar", "bio_html", "social"):
+                  if key not in p:
+                      errors.append(f"profile.yml: missing top-level key '{key}'")
+              if "social" in p:
+                  for i, s in enumerate(p["social"]):
+                      if "icon" not in s or "url" not in s:
+                          errors.append(f"profile.yml: social entry #{i+1} needs 'icon' and 'url'")
+          except Exception as e:
+              errors.append(f"profile.yml: {e}")
+
+          # experience.yml
+          try:
+              exp = load("data/experience.yml")
+              if not isinstance(exp, list):
+                  errors.append("experience.yml: top level must be a list of entries")
+              else:
+                  for i, e in enumerate(exp):
+                      for key in ("title", "company", "date"):
+                          if key not in e:
+                              errors.append(f"experience.yml: entry #{i+1} missing '{key}'")
+          except Exception as e:
+              errors.append(f"experience.yml: {e}")
+
+          # publications.yml
+          try:
+              pub = load("data/publications.yml")
+              secs = pub.get("sections") if isinstance(pub, dict) else None
+              if not secs:
+                  errors.append("publications.yml: needs a top-level 'sections:' list")
+              else:
+                  for s in secs:
+                      if "heading" not in s or "entries" not in s:
+                          errors.append(f"publications.yml: section {s!r} needs 'heading' and 'entries'")
+                          continue
+                      for j, entry in enumerate(s.get("entries") or []):
+                          for key in ("title", "authors_html"):
+                              if key not in entry:
+                                  errors.append(f"publications.yml: '{s['heading']}' entry #{j+1} missing '{key}'")
+                          for k, link in enumerate(entry.get("links") or []):
+                              if "label" not in link or "url" not in link:
+                                  errors.append(f"publications.yml: '{s['heading']}' entry #{j+1} link #{k+1} needs 'label' and 'url'")
+          except Exception as e:
+              errors.append(f"publications.yml: {e}")
+
+          if errors:
+              print("❌ Data validation failed:\n")
+              for err in errors:
+                  print("  - " + err)
+              sys.exit(1)
+          print("✅ All data files are valid.")
+          PY
