@@ -96,6 +96,26 @@
   }
 
   // ---------------------------------------------------------------------------
+  // News / updates
+  // ---------------------------------------------------------------------------
+  function renderNews(items) {
+    var el = document.getElementById("news-list");
+    if (!el) return;
+
+    el.innerHTML = (items || [])
+      .map(function (n) {
+        return (
+          '<div class="row mb-2">' +
+          '<div class="col-12">' +
+          '<span class="text-muted" style="font-weight: 600; margin-right: 10px;">' + (n.date || "") + "</span>" +
+          "<span>" + (n.html || "") + "</span>" +
+          "</div></div>"
+        );
+      })
+      .join("\n");
+  }
+
+  // ---------------------------------------------------------------------------
   // Experience
   // ---------------------------------------------------------------------------
   function renderExperience(entries) {
@@ -198,6 +218,7 @@
   // ---------------------------------------------------------------------------
   document.addEventListener("DOMContentLoaded", function () {
     loadYaml("/data/profile.yml").then(renderProfile).catch(function (e) { console.error(e); });
+    loadYaml("/data/news.yml").then(renderNews).catch(function (e) { console.error(e); });
     loadYaml("/data/experience.yml").then(renderExperience).catch(function (e) { console.error(e); });
     loadYaml("/data/publications.yml").then(renderPublications).catch(function (e) { console.error(e); });
   });

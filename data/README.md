@@ -7,6 +7,7 @@ in 1–2 minutes. You never need to touch `index.html`.
 | File | Controls |
 |------|----------|
 | `profile.yml` | Photo, name, title, affiliation, red banner, biography, interests, education, social/contact icons |
+| `news.yml` | The "News" section — short dated updates, newest first |
 | `experience.yml` | Work / research timeline cards |
 | `publications.yml` | Papers, grouped into Conferences / Journals / Chip Tapeouts |
 
@@ -44,6 +45,14 @@ Paste a block under the right `entries:` list in `publications.yml`:
 - For a PDF: drop the file in the `publication/` folder and link `/publication/yourpaper.pdf`.
 - `badge: ''` (empty) shows no venue tag on the left.
 - Add `divider_before: true` to draw a horizontal line above an entry.
+
+### Add a news update
+Paste a block at the **top** of `news.yml` (newest first):
+```yaml
+- date: Jun 2026
+  html: 'Paper accepted at <a href="https://example.com">ISCA 2026</a>!'
+```
+`html` allows links and `<strong>` emphasis.
 
 ### Add a job
 Paste a block in `experience.yml` (top of the list = most recent):

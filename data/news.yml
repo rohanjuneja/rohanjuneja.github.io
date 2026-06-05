@@ -1,0 +1,23 @@
+# =============================================================================
+# NEWS / UPDATES SECTION
+# Each "- " block is one news item, shown newest-first (top of the list = newest).
+# To add an update, copy a block to the top and edit it.
+#
+# Fields:
+#   date : short date label, e.g. "Oct 2025" or "Jun 2026"
+#   html : the update text. HTML links are allowed, e.g.
+#          'Paper accepted at <a href="...">MICRO 2025</a>.'
+# After editing, just commit & push — the website updates automatically.
+# =============================================================================
+
+- date: Oct 2025
+  html: Started as a Research Scientist Intern at <a href="https://research.ibm.com/labs/yorktown-heights">IBM Research, Yorktown Heights</a>.
+
+- date: Sep 2025
+  html: '<strong>Nexus Machine</strong> accepted at <strong>MICRO 2025</strong>.'
+
+- date: Aug 2025
+  html: '<strong>A Data-Driven Dynamic Execution Orchestration Architecture</strong> accepted at <strong>ASPLOS 2026</strong>.'
+
+- date: Jul 2025
+  html: '<strong>Building an Open CGRA Ecosystem for Agile Innovation</strong> accepted at <strong>ICCAD 2025</strong>.'
