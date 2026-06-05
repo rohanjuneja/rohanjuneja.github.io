@@ -48,7 +48,7 @@
   date: Jul 2018 – Jan 2021
   location: Bengaluru, India
   body_html: >-
-    Responsibilities include:
+    <p>Responsibilities include:</p>
     <ul>
     <li>Delivering multi-clock domain and Low Power(UPF) RTL delivery of ARM Kryo cores for Snapdragon chipsets</li>
     <li>Exposure to Power ManagerIP, DCVS and Low Power Modes using ARM&rsquo;s P-channel, and boot RTL in Snapdragon CPU&rsquo;s</li>
