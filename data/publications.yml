@@ -219,11 +219,3 @@ sections:
     links:
     - label: IEEE
       url: https://doi.org/10.1109/isocc62682.2024.10762131
-- heading: Patents
-  entries:
-  - slug: a-reconfigurable-execution-unit-for
-    badge: Patent
-    year: 2025
-    title: A Reconfigurable Execution Unit for Collective Routing and Computation of Multiple Operations for Hardware Acceleration
-    authors_html: Zhaoying Li, <u><strong>Rohan Juneja</strong></u>, Pranav Dangi, Tulika Mitra
-    venue_html: Patent 2025

@@ -39,6 +39,9 @@ OUT_YAML = os.path.join(ROOT, "data", "publications.yml")
 OVERRIDES = os.path.join(PUBS_DIR, "overrides.yml")
 
 SECTIONS = ["Conferences", "Journals", "Chip Tapeouts", "Patents"]
+# Sections parsed (so their entries don't leak into the previous section) but
+# NOT shown on the website.
+EXCLUDE_SECTIONS = {"Patents"}
 # Where parsing stops (first top-level heading after the publication record).
 END_MARKERS = ["Teaching Experience", "Awards", "Skills", "Service", "References"]
 
@@ -407,6 +410,8 @@ def main():
     manifest = []
 
     for e in parsed:
+        if e["section"] in EXCLUDE_SECTIONS:
+            continue  # parsed for boundaries, but not published to the site
         slug = make_slug(e["title"], used_slugs)
         ov = overrides.get(slug, {}) if isinstance(overrides, dict) else {}
         if ov.get("exclude"):
