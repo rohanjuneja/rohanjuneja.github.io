@@ -10,6 +10,9 @@
 # After editing, just commit & push — the website updates automatically.
 # =============================================================================
 
+- date: May 2026
+  html: '<strong>HiVec</strong> accepted at <strong>HotChips 2026</strong>. Looking to meet everyone there!'
+
 - date: Oct 2025
   html: Started as a Research Scientist Intern at <a href="https://research.ibm.com/labs/yorktown-heights">IBM Research, Yorktown Heights</a>.
 
