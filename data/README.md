@@ -8,12 +8,13 @@ in 1–2 minutes. You never need to touch `index.html`.
 |------|----------|
 | `profile.yml` | Photo, name, title, affiliation, red banner, biography, interests, education, social/contact icons |
 | `news.yml` | The "News" section — short dated updates, newest first |
-| `experience.yml` | Work / research timeline cards |
-| `publications.yml` | **Auto-generated — do not edit.** See "Publications" below. |
+| `experience.yml` | **Auto-generated — do not edit.** See "Experience & Publications" below. |
+| `publications.yml` | **Auto-generated — do not edit.** See "Experience & Publications" below. |
 
-> **Publications are different:** `publications.yml` is generated automatically
-> from your **résumé** (`files/resume.pdf`) by a GitHub Action. You don't edit it.
-> See the [Publications](#publications-automatic) section.
+> **Experience and Publications are different:** `experience.yml` and
+> `publications.yml` are generated automatically from your **résumé**
+> (`files/resume.pdf`) by a GitHub Action. You don't edit them.
+> See the [Experience & Publications](#experience--publications-automatic) section.
 
 ## Quick start
 
@@ -30,11 +31,25 @@ git push
 ```
 Then hard-refresh the site (Ctrl/Cmd + Shift + R).
 
-## Publications (automatic)
+## Experience & Publications (automatic)
 
-The Publications section is **built from your résumé** — you do not edit
-`data/publications.yml` by hand. On every push, a GitHub Action
-(`build-publications.yml`) runs `scripts/build_publications.py`, which:
+Both the **Experience** and **Publications** sections are **built from your
+résumé** — you do not edit `data/experience.yml` or `data/publications.yml` by
+hand. On every push, one GitHub Action (`build-from-resume.yml`) runs the two
+build scripts and commits the regenerated files.
+
+### Experience
+`scripts/build_experience.py` reads the "Professional Experience" section of
+`files/resume.pdf` (company, location, role, dates, bullet points; the most
+recent role marked "Present" gets the filled timeline dot).
+
+- **To add/change a role:** edit your résumé and push.
+- **Company links and corrections:** the résumé has no URLs, so set each
+  company's website in `experience/overrides.yml` (keyed by company slug). You
+  can also correct a field or hide an entry there.
+
+### Publications
+`scripts/build_publications.py`:
 
 1. reads the "Publication Record" from `files/resume.pdf`,
 2. auto-fetches each published paper's **DOI** (IEEE/ACM link) from Crossref,
@@ -72,21 +87,9 @@ Paste a block at the **top** of `news.yml` (newest first):
 `html` allows links and `<strong>` emphasis.
 
 ### Add a job
-Paste a block in `experience.yml` (top of the list = most recent):
-```yaml
-- title: Your Role
-  company: Company Name
-  url: https://company.com
-  date: Jan 2026 – Present
-  location: City, Country
-  current: true          # filled timeline dot — use only on your latest role
-  body_html: >-
-    <ul>
-    <li>Bullet point one.</li>
-    <li>Bullet point two.</li>
-    </ul>
-```
-`location` and `body_html` are optional.
+Experience is auto-generated — **edit your résumé** (`files/resume.pdf`) and push.
+See [Experience & Publications](#experience--publications-automatic) above. Set
+the company link in `experience/overrides.yml`.
 
 ### Edit your bio / banner
 In `profile.yml`, each `- ` line under `bio_html:` is one paragraph.

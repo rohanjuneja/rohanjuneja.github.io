@@ -1,0 +1,57 @@
+name: Build from resume
+
+# Regenerates data/publications.yml and data/experience.yml from files/resume.pdf
+# whenever the resume, the per-paper folders, the overrides, or the build scripts
+# change — then commits the result.
+on:
+  push:
+    branches: [main]
+    paths:
+      - "files/resume.pdf"
+      - "publications/**"
+      - "experience/**"
+      - "scripts/build_publications.py"
+      - "scripts/build_experience.py"
+      - "scripts/requirements.txt"
+      - ".github/workflows/build-from-resume.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+# Don't run several builds at once; cancel an in-flight one if a newer push lands.
+concurrency:
+  group: build-from-resume
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -r scripts/requirements.txt
+
+      - name: Regenerate publications
+        run: python scripts/build_publications.py
+
+      - name: Regenerate experience
+        run: python scripts/build_experience.py
+
+      - name: Commit changes if any
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if [ -n "$(git status --porcelain data/publications.yml data/experience.yml publications experience)" ]; then
+            git add data/publications.yml data/experience.yml publications experience
+            # [skip ci] stops this auto-commit from re-triggering any workflow.
+            git commit -m "Auto-update site data from resume [skip ci]"
+            git push
+          else
+            echo "No changes — site data already up to date."
+          fi

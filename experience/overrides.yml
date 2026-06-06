@@ -1,0 +1,27 @@
+# Company links + manual corrections for the auto-generated Experience section,
+# keyed by company slug (lowercased company name with dashes).
+#
+# The resume has no URLs, so set each company's link here. You can also correct
+# any field (title, company, location, date, current) or hide an entry.
+#
+#   <company-slug>:
+#     url: https://...        # company website (makes the name a link)
+#     title: 'Corrected role'
+#     current: true           # filled timeline dot
+#     exclude: true           # hide this entry
+#     body_html: '<ul><li>custom bullet</li></ul>'
+
+ibm-research:
+  url: https://research.ibm.com/labs/yorktown-heights
+
+national-university-of-singapore:
+  url: https://www.comp.nus.edu.sg/
+
+advanced-micro-devices:
+  url: https://www.amd.com/en
+
+renesas-electronics-corporation:
+  url: https://www.renesas.com/
+
+qualcomm:
+  url: https://www.qualcomm.com/
