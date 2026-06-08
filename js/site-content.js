@@ -98,21 +98,59 @@
   // ---------------------------------------------------------------------------
   // News / updates
   // ---------------------------------------------------------------------------
+  var NEWS_STYLE =
+    '<style>' +
+    '.news-item{display:flex;align-items:baseline;gap:14px;padding:10px 0;' +
+    'border-bottom:1px solid rgba(128,128,128,.18);}' +
+    '.news-item:last-of-type{border-bottom:0;}' +
+    '.news-date{flex:0 0 96px;font-weight:700;font-size:.8rem;letter-spacing:.02em;' +
+    'text-transform:uppercase;color:#6c757d;padding-top:1px;}' +
+    '.news-text{flex:1;line-height:1.5;}' +
+    '#news-toggle{margin-top:14px;}' +
+    '@media (max-width:575px){.news-item{flex-direction:column;gap:2px;}' +
+    '.news-date{flex-basis:auto;}}' +
+    '</style>';
+
   function renderNews(items) {
     var el = document.getElementById("news-list");
     if (!el) return;
+    items = items || [];
+    var LIMIT = 4;
 
-    el.innerHTML = (items || [])
-      .map(function (n) {
-        return (
-          '<div class="row mb-2">' +
-          '<div class="col-12">' +
-          '<span class="text-muted" style="font-weight: 600; margin-right: 10px;">' + (n.date || "") + "</span>" +
-          "<span>" + (n.html || "") + "</span>" +
-          "</div></div>"
-        );
-      })
+    function itemHtml(n, hidden) {
+      return (
+        '<div class="news-item' + (hidden ? " news-extra" : "") + '"' +
+        (hidden ? ' style="display:none;"' : "") + ">" +
+        '<span class="news-date">' + (n.date || "") + "</span>" +
+        '<span class="news-text">' + (n.html || "") + "</span>" +
+        "</div>"
+      );
+    }
+
+    var html = NEWS_STYLE + items
+      .map(function (n, i) { return itemHtml(n, i >= LIMIT); })
       .join("\n");
+
+    var extra = items.length - LIMIT;
+    if (extra > 0) {
+      html += '<button id="news-toggle" type="button" class="btn btn-sm btn-outline-secondary">' +
+        "Show " + extra + " more</button>";
+    }
+    el.innerHTML = html;
+
+    var btn = document.getElementById("news-toggle");
+    if (btn) {
+      btn.addEventListener("click", function () {
+        var expanded = btn.getAttribute("data-expanded") === "1";
+        expanded = !expanded;
+        btn.setAttribute("data-expanded", expanded ? "1" : "0");
+        var extras = el.querySelectorAll(".news-extra");
+        for (var i = 0; i < extras.length; i++) {
+          extras[i].style.display = expanded ? "flex" : "none";
+        }
+        btn.textContent = expanded ? "Show less" : ("Show " + extras.length + " more");
+      });
+    }
   }
 
   // ---------------------------------------------------------------------------
