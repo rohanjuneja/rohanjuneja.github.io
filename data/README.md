@@ -76,6 +76,14 @@ build log and is the folder name). Drop files in and push:
 Edit `publications/overrides.yml` (keyed by slug) to fix a field or hide a paper.
 This is rarely needed.
 
+### Selected (notable) publications
+The section shows only your **notable** papers by default, with a
+"Show all publications" button to expand to the full list (and "Show selected
+only" to collapse). Edit **`data/selected_publications.yml`** — list the `slug`
+of each notable paper under `selected:` (slugs are the `slug:` field in
+`publications.yml`, i.e. the `publications/<slug>/` folder names). Leave the
+list empty to show everything with no toggle.
+
 ## Common edits
 
 ### Add a news update

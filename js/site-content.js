@@ -192,75 +192,121 @@
   // ---------------------------------------------------------------------------
   // Publications
   // ---------------------------------------------------------------------------
-  function renderPublications(data) {
-    var el = document.getElementById("publications-list");
-    if (!el) return;
+  var PUB_BTN_STYLE = "margin-right: 10px; padding: 8px 16px; font-size: 0.9rem; text-transform: uppercase;";
 
-    var btnStyle = "margin-right: 10px; padding: 8px 16px; font-size: 0.9rem; text-transform: uppercase;";
+  function pubEntryHtml(pub) {
+    var divider = pub.divider_before
+      ? '<hr style="border-top: 1px solid #ddd; margin: 10px 0;">'
+      : "";
 
-    var html = (data.sections || [])
+    var hasLinks = pub.links && pub.links.length;
+    var venue = pub.venue_html
+      ? '<p class="font-italic" style="margin-bottom: ' + (hasLinks ? "10px" : "0") + ';"><em>' + pub.venue_html + "</em></p>"
+      : "";
+
+    // Status badges (e.g. Under Review, SRC Winner, Best Paper).
+    var tags = (pub.tags || [])
+      .map(function (t) {
+        return '<span class="badge badge-warning" style="margin-left: 8px; font-size: 0.7rem; vertical-align: middle; text-transform: uppercase;">' + t + "</span>";
+      })
+      .join("");
+
+    var eqNote = pub.equal_contribution
+      ? '<p class="text-muted" style="margin: 0 0 6px; font-size: 0.8rem;"><em>* Equal contribution</em></p>'
+      : "";
+
+    var buttons = hasLinks
+      ? '<div class="d-flex flex-wrap gap-2">' +
+        pub.links
+          .map(function (l) {
+            return '<a href="' + l.url + '"' + targetAttrs(l.url) +
+              ' class="btn btn-outline-dark" style="' + PUB_BTN_STYLE + '">' + l.label + "</a>";
+          })
+          .join("") +
+        "</div>"
+      : "";
+
+    return (
+      divider +
+      '<div class="row mb-2 d-flex align-items-center">' +
+      '<div class="col-md-2 d-flex align-items-center justify-content-center" style="padding-right: 5px;">' +
+      '<span class="badge badge-danger" style="font-size: 1rem; padding: 5px 10px;">' + (pub.badge || "") + "</span>" +
+      "</div>" +
+      '<div class="col-md-10" style="padding-left: 5px;">' +
+      '<h3 class="article-title" style="margin-bottom: 5px; font-size: 1.2rem;">' + pub.title + tags + "</h3>" +
+      '<p class="article-style" style="margin-bottom: 3px;">' + pub.authors_html + "</p>" +
+      venue +
+      eqNote +
+      buttons +
+      "</div></div>"
+    );
+  }
+
+  function pubSectionsHtml(sections) {
+    return sections
       .map(function (section) {
         var heading =
           '<div class="text-left" style="margin-bottom: 10px;">' +
           '<h2 style="font-size: 1.4rem; font-weight: bold; margin-top: 20px; margin-bottom: 0;">' + section.heading + "</h2>" +
           '<hr style="border-top: 1px solid #ddd; margin-top: 5px; margin-bottom: 10px;">' +
           "</div>";
-
-        var entries = (section.entries || [])
-          .map(function (pub) {
-            var divider = pub.divider_before
-              ? '<hr style="border-top: 1px solid #ddd; margin: 10px 0;">'
-              : "";
-
-            var hasLinks = pub.links && pub.links.length;
-            var venue = pub.venue_html
-              ? '<p class="font-italic" style="margin-bottom: ' + (hasLinks ? "10px" : "0") + ';"><em>' + pub.venue_html + "</em></p>"
-              : "";
-
-            // Status badges (e.g. Under Review, SRC Winner, Best Paper).
-            var tags = (pub.tags || [])
-              .map(function (t) {
-                return '<span class="badge badge-warning" style="margin-left: 8px; font-size: 0.7rem; vertical-align: middle; text-transform: uppercase;">' + t + "</span>";
-              })
-              .join("");
-
-            var eqNote = pub.equal_contribution
-              ? '<p class="text-muted" style="margin: 0 0 6px; font-size: 0.8rem;"><em>* Equal contribution</em></p>'
-              : "";
-
-            var buttons = hasLinks
-              ? '<div class="d-flex flex-wrap gap-2">' +
-                pub.links
-                  .map(function (l) {
-                    return '<a href="' + l.url + '"' + targetAttrs(l.url) +
-                      ' class="btn btn-outline-dark" style="' + btnStyle + '">' + l.label + "</a>";
-                  })
-                  .join("") +
-                "</div>"
-              : "";
-
-            return (
-              divider +
-              '<div class="row mb-2 d-flex align-items-center">' +
-              '<div class="col-md-2 d-flex align-items-center justify-content-center" style="padding-right: 5px;">' +
-              '<span class="badge badge-danger" style="font-size: 1rem; padding: 5px 10px;">' + (pub.badge || "") + "</span>" +
-              "</div>" +
-              '<div class="col-md-10" style="padding-left: 5px;">' +
-              '<h3 class="article-title" style="margin-bottom: 5px; font-size: 1.2rem;">' + pub.title + tags + "</h3>" +
-              '<p class="article-style" style="margin-bottom: 3px;">' + pub.authors_html + "</p>" +
-              venue +
-              eqNote +
-              buttons +
-              "</div></div>"
-            );
-          })
-          .join("\n");
-
-        return heading + entries;
+        return heading + (section.entries || []).map(pubEntryHtml).join("\n");
       })
       .join("\n");
+  }
 
-    el.innerHTML = html;
+  // selected: optional list of slugs (or {selected: [...]}) marking notable papers.
+  function renderPublications(data, selected) {
+    var el = document.getElementById("publications-list");
+    if (!el) return;
+
+    var allSections = data.sections || [];
+
+    // Normalise the selected slug list.
+    var slugs = Array.isArray(selected) ? selected
+      : (selected && Array.isArray(selected.selected) ? selected.selected : []);
+    var selectedSet = {};
+    slugs.forEach(function (s) { selectedSet[s] = true; });
+
+    // Build the "selected only" sections (drop the leading divider on each).
+    var selectedSections = allSections
+      .map(function (s) {
+        var entries = (s.entries || [])
+          .filter(function (p) { return selectedSet[p.slug]; })
+          .map(function (p) {
+            var c = {}; for (var k in p) c[k] = p[k]; c.divider_before = false; return c;
+          });
+        return { heading: s.heading, entries: entries };
+      })
+      .filter(function (s) { return s.entries.length; });
+
+    var selectedCount = selectedSections.reduce(function (n, s) { return n + s.entries.length; }, 0);
+
+    // No selection configured (or none matched) -> just show everything.
+    if (!selectedCount) {
+      el.innerHTML = pubSectionsHtml(allSections);
+      return;
+    }
+
+    el.innerHTML =
+      '<div id="pub-selected">' + pubSectionsHtml(selectedSections) + "</div>" +
+      '<div id="pub-all" style="display:none;">' + pubSectionsHtml(allSections) + "</div>" +
+      '<button id="pub-toggle" type="button" class="btn btn-sm btn-outline-secondary" style="margin-top: 10px;">' +
+      "Show all publications</button>";
+
+    var btn = document.getElementById("pub-toggle");
+    var sel = document.getElementById("pub-selected");
+    var all = document.getElementById("pub-all");
+    if (btn && sel && all) {
+      btn.addEventListener("click", function () {
+        var expanded = btn.getAttribute("data-expanded") === "1";
+        expanded = !expanded;
+        btn.setAttribute("data-expanded", expanded ? "1" : "0");
+        sel.style.display = expanded ? "none" : "";
+        all.style.display = expanded ? "" : "none";
+        btn.textContent = expanded ? "Show selected only" : "Show all publications";
+      });
+    }
   }
 
   // ---------------------------------------------------------------------------
@@ -270,6 +316,9 @@
     loadYaml("/data/profile.yml").then(renderProfile).catch(function (e) { console.error(e); });
     loadYaml("/data/news.yml").then(renderNews).catch(function (e) { console.error(e); });
     loadYaml("/data/experience.yml").then(renderExperience).catch(function (e) { console.error(e); });
-    loadYaml("/data/publications.yml").then(renderPublications).catch(function (e) { console.error(e); });
+    Promise.all([
+      loadYaml("/data/publications.yml"),
+      loadYaml("/data/selected_publications.yml").catch(function () { return null; }),
+    ]).then(function (r) { renderPublications(r[0], r[1]); }).catch(function (e) { console.error(e); });
   });
 })();

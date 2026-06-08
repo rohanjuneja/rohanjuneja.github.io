@@ -1,0 +1,19 @@
+# =============================================================================
+# SELECTED (notable) PUBLICATIONS
+# The Publications section shows ONLY these by default, with a
+# "Show all publications" button to expand to the full list (and back).
+#
+# List the `slug` of each notable paper under `selected:`. You can find a
+# paper's slug in data/publications.yml (the `slug:` field) or as its folder
+# name under publications/<slug>/.
+#
+# Leave the list empty to show all publications (no toggle).
+# This file is hand-edited and is NOT overwritten by the resume build.
+# =============================================================================
+selected:
+  - nexus-machine
+  - halo
+  - building-an-open-cgra-ecosystem
+  - a-data-driven-dynamic-execution
+  - hardware-aware-quantization-for-efficient
+  - nova
