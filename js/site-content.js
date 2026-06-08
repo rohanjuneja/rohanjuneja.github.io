@@ -204,10 +204,13 @@
       ? '<p class="font-italic" style="margin-bottom: ' + (hasLinks ? "10px" : "0") + ';"><em>' + pub.venue_html + "</em></p>"
       : "";
 
-    // Status badges (e.g. Under Review, SRC Winner, Best Paper).
+    // Status badges (e.g. Under Review, SRC Winner, Best Paper). Award-type tags
+    // get a trophy icon in front; plain statuses (e.g. Under Review) don't.
     var tags = (pub.tags || [])
       .map(function (t) {
-        return '<span class="badge badge-warning" style="margin-left: 8px; font-size: 0.7rem; vertical-align: middle; text-transform: uppercase;">' + t + "</span>";
+        var isAward = /award|winner|best\s*paper|honorable|mention|distinguished|finalist|nomin/i.test(t);
+        var trophy = isAward ? '<i class="fas fa-trophy" style="margin-right: 5px;"></i>' : "";
+        return '<span class="badge badge-warning" style="margin-left: 8px; font-size: 0.7rem; vertical-align: middle; text-transform: uppercase;">' + trophy + t + "</span>";
       })
       .join("");
 
