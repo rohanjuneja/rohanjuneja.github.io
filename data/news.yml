@@ -13,6 +13,12 @@
 - date: May 2026
   html: '<strong>HiVec</strong> accepted at <strong>HotChips 2026</strong>. Looking to meet everyone there!'
 
+- date: March 2026
+  html: '<strong>Canon</strong> got Best Paper Honorable Mention at <strong>ASPLOS 2026</strong>.'
+
+- date: Feb 2026
+  html: 'Won Research Excellence Award at NUS!'
+
 - date: Oct 2025
   html: Started as a Research Scientist Intern at <a href="https://research.ibm.com/labs/yorktown-heights">IBM Research, Yorktown Heights</a>.
 
@@ -20,7 +26,7 @@
   html: '<strong>Nexus Machine</strong> accepted at <strong>MICRO 2025</strong>.'
 
 - date: Aug 2025
-  html: '<strong>A Data-Driven Dynamic Execution Orchestration Architecture</strong> accepted at <strong>ASPLOS 2026</strong>.'
+  html: '<strong>Canon</strong> accepted at <strong>ASPLOS 2026</strong>.'
 
 - date: Jul 2025
   html: '<strong>Building an Open CGRA Ecosystem for Agile Innovation</strong> accepted at <strong>ICCAD 2025</strong>.'

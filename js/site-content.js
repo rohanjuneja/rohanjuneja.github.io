@@ -106,7 +106,7 @@
     '.news-date{flex:0 0 64px;font-weight:600;font-size:.72rem;letter-spacing:.02em;' +
     'text-transform:uppercase;color:#9aa0a6;white-space:nowrap;line-height:1.6;}' +
     '.news-text{flex:1;line-height:1.55;}' +
-    '#news-toggle{margin-top:12px;}' +
+    '#news-toggle{margin-top:14px;padding:9px 22px;font-size:1rem;}' +
     '@media (max-width:575px){.news-item{flex-direction:column;gap:1px;}' +
     '.news-date{flex-basis:auto;}}' +
     '</style>';
@@ -133,7 +133,7 @@
 
     var extra = items.length - LIMIT;
     if (extra > 0) {
-      html += '<button id="news-toggle" type="button" class="btn btn-sm btn-outline-secondary">' +
+      html += '<button id="news-toggle" type="button" class="btn btn-outline-secondary">' +
         "Show " + extra + " more</button>";
     }
     el.innerHTML = html;
@@ -268,31 +268,40 @@
     var selectedSet = {};
     slugs.forEach(function (s) { selectedSet[s] = true; });
 
-    // Build the "selected only" sections (drop the leading divider on each).
-    var selectedSections = allSections
-      .map(function (s) {
-        var entries = (s.entries || [])
-          .filter(function (p) { return selectedSet[p.slug]; })
-          .map(function (p) {
-            var c = {}; for (var k in p) c[k] = p[k]; c.divider_before = false; return c;
-          });
-        return { heading: s.heading, entries: entries };
-      })
-      .filter(function (s) { return s.entries.length; });
-
-    var selectedCount = selectedSections.reduce(function (n, s) { return n + s.entries.length; }, 0);
+    // Flatten the selected papers into one curated list (document order).
+    var selectedEntries = [];
+    allSections.forEach(function (s) {
+      (s.entries || []).forEach(function (p) {
+        if (selectedSet[p.slug]) {
+          var c = {}; for (var k in p) c[k] = p[k]; c.divider_before = false;
+          selectedEntries.push(c);
+        }
+      });
+    });
 
     // No selection configured (or none matched) -> just show everything.
-    if (!selectedCount) {
+    if (!selectedEntries.length) {
       el.innerHTML = pubSectionsHtml(allSections);
       return;
     }
 
+    function pubHeading(text) {
+      return '<div class="text-left" style="margin-bottom: 10px;">' +
+        '<h2 style="font-size: 1.4rem; font-weight: bold; margin-top: 20px; margin-bottom: 0;">' + text + "</h2>" +
+        '<hr style="border-top: 1px solid #ddd; margin-top: 5px; margin-bottom: 10px;"></div>';
+    }
+
+    var toggleAttrs =
+      'type="button" class="btn btn-outline-secondary" ' +
+      'style="margin-top: 16px; padding: 9px 22px; font-size: 1rem;"';
+
     el.innerHTML =
-      '<div id="pub-selected">' + pubSectionsHtml(selectedSections) + "</div>" +
+      '<div id="pub-selected">' +
+        pubHeading("Selected Publications") +
+        selectedEntries.map(pubEntryHtml).join("\n") +
+      "</div>" +
       '<div id="pub-all" style="display:none;">' + pubSectionsHtml(allSections) + "</div>" +
-      '<button id="pub-toggle" type="button" class="btn btn-sm btn-outline-secondary" style="margin-top: 10px;">' +
-      "Show all publications</button>";
+      "<button id=\"pub-toggle\" " + toggleAttrs + ">Show all publications</button>";
 
     var btn = document.getElementById("pub-toggle");
     var sel = document.getElementById("pub-selected");
