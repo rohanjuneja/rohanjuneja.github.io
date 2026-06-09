@@ -209,8 +209,12 @@
     var tags = (pub.tags || [])
       .map(function (t) {
         var isAward = /award|winner|best\s*paper|honorable|mention|distinguished|finalist|nomin/i.test(t);
-        var trophy = isAward ? '<i class="fas fa-trophy" style="margin-right: 5px;"></i>' : "";
-        return '<span class="badge badge-warning" style="margin-left: 8px; font-size: 0.7rem; vertical-align: middle; text-transform: uppercase;">' + trophy + t + "</span>";
+        var trophy = isAward
+          ? '<i class="fas fa-trophy" title="Award" style="margin-left: 8px; margin-right: 1px; color: #e0a800; font-size: 1.05rem; vertical-align: middle;"></i>'
+          : "";
+        return trophy +
+          '<span class="badge badge-warning" style="margin-left: ' + (isAward ? "4px" : "8px") +
+          '; font-size: 0.7rem; vertical-align: middle; text-transform: uppercase;">' + t + "</span>";
       })
       .join("");
 
