@@ -135,6 +135,34 @@ def normalize_date(date):
     return re.sub(r"\s*-\s*", " – ", date.strip())  # hyphen range -> en dash
 
 
+MONTHS = {
+    "jan": 1, "feb": 2, "mar": 3, "apr": 4, "may": 5, "jun": 6, "jul": 7,
+    "aug": 8, "sep": 9, "oct": 10, "nov": 11, "dec": 12,
+}
+PRESENT = 10 ** 9  # sorts after any real date
+
+
+def _month_value(token):
+    """'Jan 2021' / 'January 2021' -> sortable int (year*12+month). None if unparsable."""
+    m = re.search(r"([A-Za-z]+)\s+((?:19|20)\d{2})", token or "")
+    if not m:
+        return None
+    mon = MONTHS.get(m.group(1)[:3].lower())
+    return int(m.group(2)) * 12 + mon if mon else None
+
+
+def date_sort_key(date_str):
+    """Return (is_current, end_value, start_value) for ordering experience entries:
+    current ("Present") roles first, then most-recently-ended first."""
+    parts = re.split(r"\s*[–-]\s*", date_str or "", 1)
+    start = _month_value(parts[0]) or 0
+    end_token = parts[1] if len(parts) > 1 else parts[0]
+    is_current = bool(re.search(r"present|current|now", end_token or "", re.I))
+    end = PRESENT if is_current else (_month_value(end_token) or start)
+    # Sort ascending on this tuple -> current first, then end desc, then start desc.
+    return (0 if is_current else 1, -end, -start)
+
+
 # --------------------------------------------------------------------------- #
 # Formatting
 # --------------------------------------------------------------------------- #
@@ -199,6 +227,9 @@ def main():
             entry["body_html"] = body
         out_entries.append(entry)
         manifest.append((slug, e, "url" if url else "no-url"))
+
+    # Order: current ("Present") role(s) on top, then most-recently-ended first.
+    out_entries.sort(key=lambda en: date_sort_key(en.get("date")))
 
     header = (
         "# =============================================================================\n"

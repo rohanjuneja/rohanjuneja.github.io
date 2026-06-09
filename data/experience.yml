@@ -6,16 +6,6 @@
 #   * fix a misparse/hide -> edit experience/overrides.yml
 # The GitHub Action regenerates this file automatically on push.
 # =============================================================================
-- title: PhD Research Intern
-  company: IBM Research
-  url: https://research.ibm.com/labs/yorktown-heights
-  date: Nov 2025 – Jan 2026
-  location: Yorktown Heights, New York
-  body_html: '<ul>
-
-    <li>Designed and optimized collective communication primitives for multi-AIU systems to reduce latency and improve scalability.</li>
-
-    </ul>'
 - title: PhD Researcher
   company: National University of Singapore
   url: https://www.comp.nus.edu.sg/
@@ -33,6 +23,16 @@
     <li>Developed reconfigurable architectures with sparsity and multi-precision support to improve scalability and energy efficiency.</li>
 
     <li>Designed hardware-aware quantization techniques for TPUs and GPUs to improve inference efficiency for LLMs and other AI models. Developed CUDA kernels using the CUTLASS library to exploit hardware characteristics and maximize throughput.</li>
+
+    </ul>'
+- title: PhD Research Intern
+  company: IBM Research
+  url: https://research.ibm.com/labs/yorktown-heights
+  date: Nov 2025 – Jan 2026
+  location: Yorktown Heights, New York
+  body_html: '<ul>
+
+    <li>Designed and optimized collective communication primitives for multi-AIU systems to reduce latency and improve scalability.</li>
 
     </ul>'
 - title: PhD Research Intern
