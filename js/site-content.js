@@ -170,20 +170,32 @@
       return;
     }
 
-    function venueHtml(v) {
-      if (typeof v === "string") return v;
+    // One <li> per venue: linked name + muted year.
+    function venueLi(v) {
+      if (typeof v === "string") return '<li class="service-venue">' + v + "</li>";
       var name = v.name || "";
-      var txt = name + (v.year ? " " + v.year : "");
-      return v.url ? '<a href="' + v.url + '"' + targetAttrs(v.url) + ">" + txt + "</a>" : txt;
+      var linked = v.url ? '<a href="' + v.url + '"' + targetAttrs(v.url) + ">" + name + "</a>" : name;
+      var year = v.year ? ' <span class="service-year">&middot; ' + v.year + "</span>" : "";
+      return '<li class="service-venue">' + linked + year + "</li>";
     }
 
-    el.innerHTML = groups
+    var style =
+      "<style>" +
+      ".service-group{margin-bottom:22px;}" +
+      ".service-role{font-size:1.05rem;font-weight:700;color:#2b2b2b;" +
+      "margin:0 0 6px;padding-bottom:4px;border-bottom:1px solid rgba(128,128,128,.18);}" +
+      ".service-venues{list-style:none;padding-left:0;margin:0;}" +
+      ".service-venues li{padding:3px 0;line-height:1.5;}" +
+      ".service-year{color:#9aa0a6;font-size:.9rem;white-space:nowrap;}" +
+      "</style>";
+
+    el.innerHTML = style + groups
       .map(function (g) {
-        var venues = (g.venues || []).map(venueHtml).join(", ");
+        var venues = (g.venues || []).map(venueLi).join("\n");
         return (
-          '<div class="row mb-2">' +
-          '<div class="col-12 col-md-4"><strong>' + g.role + "</strong></div>" +
-          '<div class="col-12 col-md-8">' + venues + "</div>" +
+          '<div class="service-group">' +
+          '<div class="service-role">' + g.role + "</div>" +
+          '<ul class="service-venues">' + venues + "</ul>" +
           "</div>"
         );
       })
