@@ -1,0 +1,21 @@
+# =============================================================================
+# SERVICE — program committees, reviewing, organizing, etc.
+# Hand-edited. The "Service" section (and its nav link) only appear once this
+# file has at least one entry; an empty list hides the section entirely.
+#
+# Format: a list of role groups, each with a `role` and its `venues`.
+# A venue can be a plain string, or a map with name/year/url:
+#
+# service:
+#   - role: Technical Program Committee
+#     venues:
+#       - { name: MICRO, year: 2026 }
+#       - { name: DATE,  year: 2026, url: "https://www.date-conference.com/" }
+#   - role: External Reviewer
+#     venues:
+#       - IEEE Transactions on VLSI (TVLSI)
+#       - ISCA 2025
+#
+# After editing, commit & push — the website updates automatically.
+# =============================================================================
+service: []

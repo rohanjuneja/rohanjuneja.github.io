@@ -154,6 +154,46 @@
   }
 
   // ---------------------------------------------------------------------------
+  // Service (program committees, reviewing, organizing)
+  // ---------------------------------------------------------------------------
+  function renderService(data) {
+    var el = document.getElementById("service-list");
+    if (!el) return;
+    var section = document.getElementById("service");
+    var nav = document.getElementById("nav-service");
+
+    var groups = (data && Array.isArray(data.service)) ? data.service
+      : (Array.isArray(data) ? data : []);
+    groups = groups.filter(function (g) { return g && g.role && (g.venues || []).length; });
+
+    if (!groups.length) {  // nothing to show -> keep section + nav hidden
+      return;
+    }
+
+    function venueHtml(v) {
+      if (typeof v === "string") return v;
+      var name = v.name || "";
+      var txt = name + (v.year ? " " + v.year : "");
+      return v.url ? '<a href="' + v.url + '"' + targetAttrs(v.url) + ">" + txt + "</a>" : txt;
+    }
+
+    el.innerHTML = groups
+      .map(function (g) {
+        var venues = (g.venues || []).map(venueHtml).join(", ");
+        return (
+          '<div class="row mb-2">' +
+          '<div class="col-12 col-md-4"><strong>' + g.role + "</strong></div>" +
+          '<div class="col-12 col-md-8">' + venues + "</div>" +
+          "</div>"
+        );
+      })
+      .join("\n");
+
+    if (section) section.style.display = "";
+    if (nav) nav.style.display = "";
+  }
+
+  // ---------------------------------------------------------------------------
   // Experience
   // ---------------------------------------------------------------------------
   function renderExperience(entries) {
@@ -331,6 +371,7 @@
   document.addEventListener("DOMContentLoaded", function () {
     loadYaml("/data/profile.yml").then(renderProfile).catch(function (e) { console.error(e); });
     loadYaml("/data/news.yml").then(renderNews).catch(function (e) { console.error(e); });
+    loadYaml("/data/service.yml").then(renderService).catch(function (e) { console.error(e); });
     loadYaml("/data/experience.yml").then(renderExperience).catch(function (e) { console.error(e); });
     Promise.all([
       loadYaml("/data/publications.yml"),
