@@ -18,4 +18,14 @@
 #
 # After editing, commit & push — the website updates automatically.
 # =============================================================================
-service: []
+service:
+  - role: Technical Program Committee
+    venues:
+      - { name: IEEE/ACM International Symposium on Microarchitecture (MICRO), year: 2026 }
+  - role: Artifact Evaluation Program Committee Member
+    venues:
+      - { name: IEEE/ACM International Symposium on Microarchitecture (MICRO), year: 2026}
+  - role: External Reviewer
+    venues:
+      - IEEE Transactions on Computer-Aided Design of Integrated Circuits and Systems (TCAD), 2025
+      - ACM Transactions on Reconfigurable Technology and Systems (TRETS), 2026
