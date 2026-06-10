@@ -9,23 +9,28 @@
 # service:
 #   - role: Technical Program Committee
 #     venues:
-#       - { name: MICRO, year: 2026 }
+#       - { name: MICRO, year: 2026 }          # url auto-filled on push (see below)
 #       - { name: DATE,  year: 2026, url: "https://www.date-conference.com/" }
 #   - role: External Reviewer
 #     venues:
-#       - IEEE Transactions on VLSI (TVLSI)
-#       - ISCA 2025
+#       - IEEE Transactions on VLSI (TVLSI)    # plain string -> shown, not linked
+#
+# AUTO-LINKS: on push, scripts/build_service.py fills `url` for any *map* venue
+# that has none, by recognizing the acronym in parentheses, e.g. "(MICRO)"
+# (well-known venues + journals via Wikidata). It never overwrites a url you set
+# and leaves unknown venues unlinked. To force a link, just add `url:` yourself.
+# Plain-string venues are not auto-linked — write a venue as a map to enable it.
 #
 # After editing, commit & push — the website updates automatically.
 # =============================================================================
 service:
   - role: Technical Program Committee
     venues:
-      - { name: IEEE/ACM International Symposium on Microarchitecture (MICRO), year: 2026 }
+      - {name: IEEE/ACM International Symposium on Microarchitecture (MICRO), year: 2026, url: https://www.microarch.org/}
   - role: Artifact Evaluation Program Committee Member
     venues:
-      - { name: IEEE/ACM International Symposium on Microarchitecture (MICRO), year: 2026}
+      - {name: IEEE/ACM International Symposium on Microarchitecture (MICRO), year: 2021, url: https://www.microarch.org/}
   - role: External Reviewer
     venues:
-      - IEEE Transactions on Computer-Aided Design of Integrated Circuits and Systems (TCAD), 2025
-      - ACM Transactions on Reconfigurable Technology and Systems (TRETS), 2026
+      - {name: IEEE Transactions on Computer-Aided Design of Integrated Circuits and Systems (TCAD), year: 2025, url: http://ieee-ceda.org/publications/tcad}
+      - {name: ACM Transactions on Reconfigurable Technology and Systems (TRETS), year: 2026, url: https://dl.acm.org/journal/trets}

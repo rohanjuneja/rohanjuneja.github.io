@@ -1,3 +1,4 @@
 pdfplumber>=0.11
 PyYAML>=6.0
 requests>=2.27
+ruamel.yaml>=0.17

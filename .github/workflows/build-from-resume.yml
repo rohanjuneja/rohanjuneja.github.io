@@ -10,8 +10,10 @@ on:
       - "files/resume.pdf"
       - "publications/**"
       - "experience/**"
+      - "data/service.yml"
       - "scripts/build_publications.py"
       - "scripts/build_experience.py"
+      - "scripts/build_service.py"
       - "scripts/requirements.txt"
       - ".github/workflows/build-from-resume.yml"
   workflow_dispatch:
@@ -43,12 +45,16 @@ jobs:
       - name: Regenerate experience
         run: python scripts/build_experience.py
 
+      - name: Resolve service links
+        run: python scripts/build_service.py
+
       - name: Commit changes if any
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          if [ -n "$(git status --porcelain data/publications.yml data/experience.yml publications experience)" ]; then
-            git add data/publications.yml data/experience.yml publications experience
+          paths="data/publications.yml data/experience.yml data/service.yml publications experience"
+          if [ -n "$(git status --porcelain $paths)" ]; then
+            git add $paths
             # [skip ci] stops this auto-commit from re-triggering any workflow.
             git commit -m "Auto-update site data from resume [skip ci]"
             git push
