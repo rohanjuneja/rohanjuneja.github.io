@@ -16,6 +16,8 @@ sections:
     title: 'HALO: Hardware-aware quantization with low critical-path-delay weights for LLM acceleration'
     authors_html: <u><strong>Rohan Juneja</strong></u>, Shivam Aggarwal, Safeen Huda, Tulika Mitra, Li-Shiuan Peh
     venue_html: In AAAI Conference on Artificial Intelligence (<strong>AAAI</strong>) 2026
+    tags:
+    - Oral Presentation
     links:
     - label: DOI
       url: https://doi.org/10.1609/aaai.v40i27.39406
@@ -198,8 +200,6 @@ sections:
     title: 'HiVec: Scalable and Energy Efficient CGRA in a RISC-V SoC for Wearables'
     authors_html: Rakshith Harish<sup>*</sup>, <u><strong>Rohan Juneja</strong></u><sup>*</sup>, Pranav Dangi, Zhenyu Bai, Vishnu Nambiar, Yi Sheng Chong, Bin Zhao, Vishruti Ranjan, Rahul Dutta, Li-Shiuan Peh, Tulika Mitra and Anh Tuan Do
     venue_html: In Hot Chips Symposium (<strong>HotChips</strong>) 2026
-    tags:
-    - Under Review
     equal_contribution: true
   - slug: pace
     badge: HotChips
