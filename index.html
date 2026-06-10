@@ -138,6 +138,12 @@
     .home-section { padding: 40px 0 !important; }
     .home-section:first-of-type { padding-top: 30px !important; }
     @media (max-width: 767px) { .home-section { padding: 28px 0 !important; } }
+
+    /* Dark-mode fixes: the theme leaves these dark-on-dark (invisible). */
+    .dark .btn-outline-dark { color: #f8f8f2; border-color: rgba(248,248,242,.5); }
+    .dark .btn-outline-dark:hover,
+    .dark .btn-outline-dark:focus { color: #272935; background-color: #f8f8f2; border-color: #f8f8f2; }
+    .dark .service-role { color: #f8f8f2; }
   </style>
 
 </head>
