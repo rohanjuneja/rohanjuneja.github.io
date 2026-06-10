@@ -182,7 +182,7 @@
     var style =
       "<style>" +
       ".service-group{margin-bottom:22px;}" +
-      ".service-role{font-size:1.05rem;font-weight:700;color:#2b2b2b;" +
+      ".service-role{font-family:Lato,sans-serif;font-size:1.05rem;font-weight:700;color:#2b2b2b;" +
       "margin:0 0 6px;padding-bottom:4px;border-bottom:1px solid rgba(128,128,128,.18);}" +
       ".service-venues{list-style:none;padding-left:0;margin:0;}" +
       ".service-venues li{padding:3px 0;line-height:1.5;}" +
